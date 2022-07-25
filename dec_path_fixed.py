@@ -9,20 +9,19 @@ def path(path):
             date = datetime.now()
             with open(path, "w") as file:
                 file.write(f'Запускается {func.__name__}\nДата и время запуска: {date}\nВызвана с аргументами {args, kwargs}\nBозвращаемое значение {inner}')
-            print(f"Запускается '{func.__name__}'. Дата и время запуска: {date}")
-            func(args)
-
-
+            #print(f"Запускается '{func.__name__}'. Дата и время запуска: {date}")  При вызове функции несколько раз выглядит плохо
+            return func(*args)
         return inner
     return decorator
 
 @path(PATH)
-def test(arg):
-    x = int(input("Input your number:"))
-    if x == 1:
-        print("ok")
-    else:
-        print("not ok)")
+def summator(x, y):
+   return x + y
 
-if __name__ == '__main__':
-    test(1)
+three = summator(1, 2)
+five = summator(2, 3)
+
+result = summator(three, five)
+
+print('result: ', result)
+print('result type: ', type(result))
